@@ -39,7 +39,7 @@ public class BankMatcher implements Matcher {
      */
     @Override
     public boolean isValid(final String bankId) {
-        if (bankId.length() < 13 || bankId.length() > 19) {
+        if (bankId == null || (bankId.length() < 13 || bankId.length() > 19)) {
             return false;
         }
         int[] cardNoArr = new int[bankId.length()];

@@ -1,8 +1,8 @@
-package com.lufi.preprocess;
+package com.lufi.preproccess;
 
-import com.lufi.preprocess.converters.ExcelConverter;
-import com.lufi.preprocess.converters.PdfConverter;
-import com.lufi.preprocess.converters.TxtConverter;
+import com.lufi.preproccess.converters.ExcelConverter;
+import com.lufi.preproccess.converters.PdfConverter;
+import com.lufi.preproccess.converters.TxtConverter;
 import com.lufi.utils.Constants;
 
 /**

@@ -1,6 +1,6 @@
 package com.lufi.snapshot;
 
-import com.lufi.preprocess.Converter;
+import com.lufi.preproccess.Converter;
 
 /**
  * Created by Sunny on 2018/1/4.

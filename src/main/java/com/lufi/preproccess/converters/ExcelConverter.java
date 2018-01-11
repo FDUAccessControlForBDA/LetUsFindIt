@@ -77,7 +77,7 @@ public class ExcelConverter implements Converter {
         } catch (InvalidFormatException | IOException ex) {
             Logger.getLogger(ExcelConverter.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return newFileName;
     }
 
     @Override

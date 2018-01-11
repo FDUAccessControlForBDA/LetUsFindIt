@@ -17,15 +17,12 @@
  */
 package com.lufi.utils;
 
-<<<<<<< HEAD
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.Format;
-=======
 import java.text.DateFormatSymbols;
 import java.text.Format;
 import java.text.DateFormat;
->>>>>>> 735f7d5c563ba1934676e8e4be87cc65cc533303
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;

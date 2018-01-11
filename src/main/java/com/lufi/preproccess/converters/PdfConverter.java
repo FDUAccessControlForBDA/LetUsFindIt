@@ -89,7 +89,7 @@ public class PdfConverter implements Converter {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return newFileName;
     }
 
     @Override

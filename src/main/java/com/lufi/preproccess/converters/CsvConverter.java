@@ -48,7 +48,7 @@ public class CsvConverter implements Converter{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return newFileName;
     }
 
     @Override

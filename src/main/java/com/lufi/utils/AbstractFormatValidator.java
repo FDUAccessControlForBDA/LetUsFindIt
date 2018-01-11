@@ -17,17 +17,14 @@
  */
 package com.lufi.utils;
 
-<<<<<<< HEAD
 import java.io.Serializable;
 import java.text.Format;
 import java.text.ParsePosition;
 import java.util.Locale;
-=======
 import java.text.Format;
 import java.text.ParsePosition;
 import java.util.Locale;
 import java.io.Serializable;
->>>>>>> 735f7d5c563ba1934676e8e4be87cc65cc533303
 
 /**
  * <p>Abstract class for <i>Format</i> based Validation.</p>

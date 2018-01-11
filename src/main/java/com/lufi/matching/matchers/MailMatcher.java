@@ -1,6 +1,7 @@
 package com.lufi.matching.matchers;
 
 import com.lufi.matching.Matcher;
+import com.lufi.utils.Constants;
 
 import java.util.regex.Pattern;
 
@@ -33,5 +34,10 @@ public class MailMatcher implements Matcher{
     public boolean isValid(final String mailAddress) {
         String pattern="^\\s*?(.+)@(.+?)\\s*$";
         return Pattern.matches(pattern,mailAddress);
+    }
+
+    @Override
+    public String type() {
+        return Constants.MAIL;
     }
 }

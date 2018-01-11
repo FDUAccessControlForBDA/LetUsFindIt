@@ -1,6 +1,7 @@
 package com.lufi.matching.matchers;
 
 import com.lufi.matching.Matcher;
+import com.lufi.utils.Constants;
 
 /**
  * Created by Sunny on 2018/1/4.
@@ -39,6 +40,11 @@ public class AddressMatcher implements Matcher {
             return true;
         else
             return false;
+    }
+
+    @Override
+    public String type() {
+        return Constants.ADDRESS;
     }
 
     private static int count(String address, String[] matcher){

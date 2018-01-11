@@ -3,6 +3,7 @@ package com.lufi.matching.matchers;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import com.lufi.matching.Matcher;
+import com.lufi.utils.Constants;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -63,6 +64,11 @@ public class BankMatcher implements Matcher {
         }
 
         return true;
+    }
+
+    @Override
+    public String type() {
+        return Constants.BANK;
     }
 
     /**

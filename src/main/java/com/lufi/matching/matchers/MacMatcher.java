@@ -1,6 +1,7 @@
 package com.lufi.matching.matchers;
 
 import com.lufi.matching.Matcher;
+import com.lufi.utils.Constants;
 
 import java.util.regex.Pattern;
 
@@ -32,5 +33,10 @@ public class MacMatcher  implements Matcher {
     public boolean isValid(final String macAddress) {
         String pattern = "^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$";
         return Pattern.matches(pattern,macAddress);
+    }
+
+    @Override
+    public String type() {
+        return Constants.MAC;
     }
 }

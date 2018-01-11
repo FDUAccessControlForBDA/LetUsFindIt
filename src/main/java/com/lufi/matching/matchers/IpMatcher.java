@@ -1,6 +1,7 @@
 package com.lufi.matching.matchers;
 
 import com.lufi.matching.Matcher;
+import com.lufi.utils.Constants;
 
 import java.util.regex.Pattern;
 
@@ -33,5 +34,10 @@ public class IpMatcher implements Matcher{
     public boolean isValid(final String ipAddress) {
         String pattern = "((?:(?:25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d)))\\.){3}(?:25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d))))";
         return Pattern.matches(pattern,ipAddress);
+    }
+
+    @Override
+    public String type() {
+        return Constants.IP;
     }
 }

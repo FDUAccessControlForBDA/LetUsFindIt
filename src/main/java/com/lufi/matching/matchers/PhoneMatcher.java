@@ -1,6 +1,7 @@
 package com.lufi.matching.matchers;
 
 import com.lufi.matching.Matcher;
+import com.lufi.utils.Constants;
 
 import java.util.Map;
 
@@ -64,5 +65,10 @@ public class PhoneMatcher implements Matcher {
             }
         }
         return false;
+    }
+
+    @Override
+    public String type() {
+        return Constants.PHONE;
     }
 }

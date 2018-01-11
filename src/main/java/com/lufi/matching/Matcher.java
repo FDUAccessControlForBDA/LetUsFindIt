@@ -5,4 +5,5 @@ package com.lufi.matching;
  */
 public interface Matcher {
     boolean isValid(final String input);
+    String type();
 }

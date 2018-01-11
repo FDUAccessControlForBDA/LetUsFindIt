@@ -1,6 +1,7 @@
 package com.lufi.matching.matchers;
 
 import com.lufi.matching.Matcher;
+import com.lufi.utils.Constants;
 import com.lufi.utils.DateValidator;
 
 import java.util.Date;
@@ -68,5 +69,10 @@ public class IdMatcher implements Matcher {
         if (id.length() == 15)
             return true;
         return cs[cs.length - 1] == PARITY_LIST[power % 11];
+    }
+
+    @Override
+    public String type() {
+        return Constants.ID;
     }
 }

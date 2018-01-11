@@ -11,5 +11,6 @@ public interface Converter {
     String getNewFileName();
     Map<String, String> getMap();
     void doInit(final String fileName, final String suffix);
-
+    long getLines();
+    long getSize();
 }

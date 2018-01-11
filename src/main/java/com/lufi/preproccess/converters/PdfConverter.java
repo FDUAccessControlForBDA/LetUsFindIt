@@ -24,6 +24,8 @@ public class PdfConverter implements Converter {
     private String fileName;
     private String newFileName;
     private Map<String, String> map;
+    private long lines;
+    private long size;
 
     private static File targetFile = null;
     private static BufferedWriter writer = null;
@@ -40,7 +42,7 @@ public class PdfConverter implements Converter {
 
         String buffer;
         String tmp;
-        int j = 1;
+        long j = 1;
         try {
 
             // 初始化pdf reader
@@ -65,7 +67,7 @@ public class PdfConverter implements Converter {
                 // 读取被转换成txt的文本
                 BufferedReader reader = new BufferedReader(new StringReader(tmp));
                 String data;
-                int start = j;
+                long start = j;
                 while((data = reader.readLine()) != null){
                     if(!data.trim().isEmpty()) { // 判断是否一整行都是空格
                         // 将空格和中文的逗号都替换为英文的逗号
@@ -76,12 +78,13 @@ public class PdfConverter implements Converter {
                 }
                 // PDF页数和csv行数的mapping
                 // 例如：1-->1-29
-                int end = j-1;
+                long end = j-1;
                 if(end < start)
                     map.put(i+"", null);
                 else
                     map.put(i+"", start+"-"+end);
             }
+            lines = j-1;
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -107,8 +110,10 @@ public class PdfConverter implements Converter {
     @Override
     public void doInit(String fileName, String suffix) {
         this.fileName = fileName;
-        this.newFileName = FilenameUtils.getFullPath(fileName) + FilenameUtils.getBaseName(fileName) + "."+suffix;
+        this.newFileName = FilenameUtils.getFullPath(fileName) + FilenameUtils.getBaseName(fileName) + "_new."+suffix;
         this.map = new HashMap<>();
+        File file = new File(fileName);
+        this.size = file.length();
         targetFile = new File(newFileName);
         writer = null;
 
@@ -120,6 +125,16 @@ public class PdfConverter implements Converter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public long getLines() {
+        return lines;
+    }
+
+    @Override
+    public long getSize(){
+        return size;
     }
 
     private static String regexNonePrintChar(String content){

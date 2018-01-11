@@ -5,9 +5,9 @@ package com.lufi.matching;
  */
 public class MatchInfo {
 
-    private String type;
-    private String detail;
-    private String location;
+    private String type; // 隐私信息的类型
+    private String detail; // 隐私信息的详细内容
+    private String location; // 隐私信息对应的行数
 
     public MatchInfo(){}
 

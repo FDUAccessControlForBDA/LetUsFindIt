@@ -22,6 +22,8 @@ public class ExcelConverter implements Converter {
     private String fileName;
     private String newFileName;
     private Map<String, String> map;
+    private long lines;
+    private long size;
 
     private static File targetFile = null;
     private static BufferedWriter writer = null;
@@ -38,7 +40,7 @@ public class ExcelConverter implements Converter {
         }
         String buffer;
         InputStream in;
-        int m = 1;
+        long m = 1;
         try {
             doInit(fileName, Constants.SUFFIX_CSV);
 
@@ -48,7 +50,7 @@ public class ExcelConverter implements Converter {
             for (int i = 0; i < wb.getNumberOfSheets(); i++) {
                 Sheet sheet = wb.getSheetAt(i);
                 Row row;
-                int start = m;
+                long start = m;
                 for (int j = 0; j < sheet.getLastRowNum(); j++) {
                     row = sheet.getRow(j);
                     buffer = m + ",";
@@ -63,12 +65,13 @@ public class ExcelConverter implements Converter {
                 }
                 // Excel文件工作簿名和csv文件行数的mapping
                 // 例如：Sheet1-->1-212
-                int end = m-1;
+                long end = m-1;
                 if(end < start)
                     map.put(wb.getSheetAt(i).getSheetName(), null);
                 else
                     map.put(wb.getSheetAt(i).getSheetName(), start + "-" + end);
             }
+            lines = m-1;
             writer.close();
             in.close();
         } catch (InvalidFormatException | IOException ex) {
@@ -95,8 +98,10 @@ public class ExcelConverter implements Converter {
     @Override
     public void doInit(String fileName, String suffix) {
         this.fileName = fileName;
-        this.newFileName = FilenameUtils.getFullPath(fileName) + FilenameUtils.getBaseName(fileName) + "."+suffix;
+        this.newFileName = FilenameUtils.getFullPath(fileName) + FilenameUtils.getBaseName(fileName) + "_new."+suffix;
         this.map = new HashMap<>();
+        File file = new File(fileName);
+        this.size = file.length();
         targetFile = new File(newFileName);
         writer = null;
 
@@ -108,5 +113,15 @@ public class ExcelConverter implements Converter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public long getLines() {
+        return lines;
+    }
+
+    @Override
+    public long getSize(){
+        return size;
     }
 }

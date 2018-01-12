@@ -5,13 +5,13 @@ import scala.util.Random
 
 object NewIt {
   def main(args: Array[String]): Unit = {
-    val filePath = "src/main/files/sample.csv"
+    val filePath = "src/main/files/sample.txt"
     val writer = new FileWriter(new File(filePath), false)
-    for (i <- 1 to 10) {
+    for (i <- 1 to 10000) {
       var phoneNum = getRandomPhoneNum()
       var bankId = getRandomBankId()
       var id = getRandomId()
-      writer.write(i + "," + phoneNum + "," + bankId + "," + id)
+      writer.write(phoneNum + " " + bankId + " " + id)
       writer.write(System.getProperty("line.separator"))
     }
 
@@ -53,7 +53,8 @@ object NewIt {
     val rand = new Random()
     var power = 0
     //随机区位码
-    var id = "110000"//randomNum(110000, 660000)
+    var id = randomNum(11, 66)
+    id += "0000"
     //随机日期
     id += randomNum(1900, 2017)
     id += randomNum(0, 13)

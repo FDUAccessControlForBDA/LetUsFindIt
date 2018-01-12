@@ -1,13 +1,15 @@
 package com.lufi.matching;
 
+import java.io.Serializable;
+
 /**
  * Created by Sunny on 2018/1/11.
  */
-public class MatchInfo {
+public class MatchInfo implements Serializable {
 
-    private String type;
-    private String detail;
-    private String location;
+    private String type; // 隐私信息的类型
+    private String detail; // 隐私信息的详细内容
+    private String location; // 隐私信息对应的行数
 
     public MatchInfo(){}
 

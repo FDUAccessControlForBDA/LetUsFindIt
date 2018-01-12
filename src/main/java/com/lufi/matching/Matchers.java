@@ -1,11 +1,12 @@
 package com.lufi.matching;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Sunny on 2018/1/4.
  */
-public class Matchers {
+public class Matchers implements Serializable{
 
     public Matchers(){}
 

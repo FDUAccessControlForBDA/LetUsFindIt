@@ -3,12 +3,13 @@ package com.lufi.matching.matchers;
 import com.lufi.matching.Matcher;
 import com.lufi.utils.Constants;
 
+import java.io.Serializable;
 import java.util.regex.Pattern;
 
 /**
  * Created by symsimmy on 2018/1/4
  */
-public class IpMatcher implements Matcher{
+public class IpMatcher implements Matcher,Serializable {
 
     private static volatile IpMatcher INSTANCE = null;
 

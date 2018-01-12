@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Sunny on 2018/1/4.
@@ -22,6 +24,8 @@ public class ExcelConverter implements Converter {
     private String fileName;
     private String newFileName;
     private Map<String, String> map;
+    private long lines;
+    private long size;
 
     private static File targetFile = null;
     private static BufferedWriter writer = null;
@@ -38,7 +42,7 @@ public class ExcelConverter implements Converter {
         }
         String buffer;
         InputStream in;
-        int m = 1;
+        long m = 1;
         try {
             doInit(fileName, Constants.SUFFIX_CSV);
 
@@ -48,14 +52,14 @@ public class ExcelConverter implements Converter {
             for (int i = 0; i < wb.getNumberOfSheets(); i++) {
                 Sheet sheet = wb.getSheetAt(i);
                 Row row;
-                int start = m;
+                long start = m;
                 for (int j = 0; j < sheet.getLastRowNum(); j++) {
                     row = sheet.getRow(j);
                     buffer = m + ",";
                     for (int k = 0; k < row.getLastCellNum(); k++) {
                         // 去掉所有cell中的空值
                         if(row.getCell(k) != null && String.valueOf(row.getCell(k)).length() != 0)
-                            buffer += row.getCell(k) + ",";
+                            buffer += regexNonePrintChar(String.valueOf(row.getCell(k))) + ",";
                     }
                     buffer += System.getProperty("line.separator");
                     writer.write(buffer);
@@ -63,18 +67,19 @@ public class ExcelConverter implements Converter {
                 }
                 // Excel文件工作簿名和csv文件行数的mapping
                 // 例如：Sheet1-->1-212
-                int end = m-1;
+                long end = m-1;
                 if(end < start)
                     map.put(wb.getSheetAt(i).getSheetName(), null);
                 else
                     map.put(wb.getSheetAt(i).getSheetName(), start + "-" + end);
             }
+            lines = m-1;
             writer.close();
             in.close();
         } catch (InvalidFormatException | IOException ex) {
             Logger.getLogger(ExcelConverter.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return newFileName;
     }
 
     @Override
@@ -95,8 +100,10 @@ public class ExcelConverter implements Converter {
     @Override
     public void doInit(String fileName, String suffix) {
         this.fileName = fileName;
-        this.newFileName = FilenameUtils.getFullPath(fileName) + FilenameUtils.getBaseName(fileName) + "."+suffix;
+        this.newFileName = FilenameUtils.getFullPath(fileName) + FilenameUtils.getBaseName(fileName) + "_new."+suffix;
         this.map = new HashMap<>();
+        File file = new File(fileName);
+        this.size = file.length();
         targetFile = new File(newFileName);
         writer = null;
 
@@ -108,5 +115,22 @@ public class ExcelConverter implements Converter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public long getLines() {
+        return lines;
+    }
+
+    @Override
+    public long getSize(){
+        return size;
+    }
+
+    private  static String regexNonePrintChar(String content){
+        Pattern pattern =Pattern.compile("\\s+");
+        Matcher matcher = pattern.matcher(content);
+        String result = matcher.replaceAll("");
+        return result;
     }
 }

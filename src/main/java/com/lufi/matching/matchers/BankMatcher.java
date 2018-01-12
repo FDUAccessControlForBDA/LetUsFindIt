@@ -1,24 +1,23 @@
 package com.lufi.matching.matchers;
 
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Table;
 import com.lufi.matching.Matcher;
 import com.lufi.utils.Constants;
 
-import java.util.Iterator;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Created by Sunny on 2018/1/4.
  */
-public class BankMatcher implements Matcher {
+public class BankMatcher implements Matcher,Serializable {
 
     private static volatile BankMatcher INSTANCE = null;
 
-    private final Table<String,Integer,String> banks;
+    private final Map<String,String> banks;
 
     private BankMatcher(){
-        banks = Mapping.multiMapOf("bank-bin");
+        banks = Mapping.mapOf("bank-new","bankprefix");
     }
 
     public static BankMatcher getInstance(){
@@ -82,12 +81,9 @@ public class BankMatcher implements Matcher {
             return false;
         }
 
-        Set<Table.Cell<String,Integer,String>> bankSet = banks.cellSet();
-        Iterator<Table.Cell<String,Integer,String>> it = bankSet.iterator();
-        while(it.hasNext()){
-            Table.Cell<String,Integer,String> bank = it.next();
-            if(bankId.contains(bank.getRowKey()) && bankId.length() == bank.getColumnKey()){
-                //System.out.println(bank.getValue());
+
+        for(String key : banks.keySet()){
+            if(Pattern.matches(key,bankId)){
                 return true;
             }
         }

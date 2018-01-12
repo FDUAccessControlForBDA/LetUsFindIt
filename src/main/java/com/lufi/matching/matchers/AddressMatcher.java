@@ -3,15 +3,17 @@ package com.lufi.matching.matchers;
 import com.lufi.matching.Matcher;
 import com.lufi.utils.Constants;
 
+import java.io.Serializable;
+
 /**
  * Created by Sunny on 2018/1/4.
  */
-public class AddressMatcher implements Matcher {
+public class AddressMatcher implements Matcher,Serializable {
 
     private static volatile AddressMatcher INSTANCE = null;
 
     private static String[] cityMatcher = {"省","市","区","县","乡","镇","村"};
-    private static String[] streetMatcher = {"大道","路","街","弄"};
+    private static String[] streetMatcher = {"大道","路","街","弄","宅"};
     private static String[] numberMatcher = {"队","号","丘","组","楼","层","室"};
 
     private AddressMatcher(){}

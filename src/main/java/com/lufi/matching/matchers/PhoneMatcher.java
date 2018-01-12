@@ -3,12 +3,13 @@ package com.lufi.matching.matchers;
 import com.lufi.matching.Matcher;
 import com.lufi.utils.Constants;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
  * Created by Sunny on 2018/1/4.
  */
-public class PhoneMatcher implements Matcher {
+public class PhoneMatcher implements Matcher,Serializable {
 
     private static volatile PhoneMatcher INSTANCE = null;
 

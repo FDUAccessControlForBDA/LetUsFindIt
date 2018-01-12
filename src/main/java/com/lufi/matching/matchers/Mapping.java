@@ -27,14 +27,14 @@ public class Mapping {
         return mapping;
     }
 
-    public static Table<String,Integer,String> multiMapOf(final String filename){
-        Table<String,Integer,String> multiMapping = HashBasedTable.create();
+    public static Map<String,String> mapOf(final String filename,final String tag){
+        Map<String,String> mapping = new HashMap<>();
         Scanner cin = resource(filename);
         while(cin.hasNext()){
-            multiMapping.put(cin.next(),cin.nextInt(),cin.next());
+            mapping.put(cin.next(),tag);
         }
 
         cin.close();
-        return multiMapping;
+        return mapping;
     }
 }

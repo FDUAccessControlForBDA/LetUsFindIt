@@ -4,13 +4,14 @@ import com.lufi.matching.Matcher;
 import com.lufi.utils.Constants;
 import com.lufi.utils.DateValidator;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 
 /**
  * Created by Sunny on 2018/1/4.
  */
-public class IdMatcher implements Matcher {
+public class IdMatcher implements Matcher,Serializable {
 
     private static volatile IdMatcher INSTANCE = null;
 

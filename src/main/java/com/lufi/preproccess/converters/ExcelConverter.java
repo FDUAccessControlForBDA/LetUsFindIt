@@ -78,6 +78,8 @@ public class ExcelConverter implements Converter {
             in.close();
         } catch (InvalidFormatException | IOException ex) {
             Logger.getLogger(ExcelConverter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ArithmeticException ex){
+            Logger.getLogger(ExcelConverter.class.getName()).log(Level.SEVERE, null, ex);
         }
         return newFileName;
     }

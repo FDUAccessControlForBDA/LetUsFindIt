@@ -33,7 +33,7 @@ public class MailMatcher implements Matcher,Serializable {
      */
     @Override
     public boolean isValid(final String mailAddress) {
-        String pattern="^\\s*?(.+)@(.+?)\\s*$";
+        String pattern="^[a-z0-9]+([._\\\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$";
         return Pattern.matches(pattern,mailAddress);
     }
 

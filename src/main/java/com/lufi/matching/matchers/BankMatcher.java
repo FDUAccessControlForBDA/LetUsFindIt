@@ -81,7 +81,6 @@ public class BankMatcher implements Matcher,Serializable {
             return false;
         }
 
-
         for(String key : banks.keySet()){
             if(Pattern.matches(key,bankId)){
                 return true;

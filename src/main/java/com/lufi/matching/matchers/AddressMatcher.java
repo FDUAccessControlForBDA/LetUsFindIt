@@ -14,7 +14,7 @@ public class AddressMatcher implements Matcher,Serializable {
 
     private static String[] cityMatcher = {"省","市","区","县","乡","镇","村"};
     private static String[] streetMatcher = {"大道","路","街","弄","宅"};
-    private static String[] numberMatcher = {"队","号","丘","组","楼","层","室"};
+    private static String[] numberMatcher = {"队","号","丘","组","楼","层","室","幢","单元"};
 
     private AddressMatcher(){}
 
@@ -34,11 +34,16 @@ public class AddressMatcher implements Matcher,Serializable {
         if(address == null || address.length() == 0){
             return false;
         }
-        int count0 = count(address, cityMatcher);
-        int count1 = count(address, streetMatcher);
-        int count2 = count(address, numberMatcher);
 
-        if((count0 > 0 || count1 > 0) && count2 > 0)
+        int index0 = index(address,cityMatcher);
+        String tmp = address.substring(index0);
+
+        int index1 = index(tmp,streetMatcher);
+        tmp = tmp.substring(index1);
+
+        int index2 = index(tmp, numberMatcher);
+
+        if((index0 > 0 || index1 > 0) && index2 > 0)
             return true;
         else
             return false;
@@ -49,13 +54,13 @@ public class AddressMatcher implements Matcher,Serializable {
         return Constants.ADDRESS;
     }
 
-    private static int count(String address, String[] matcher){
-        int count = 0;
+    private static int index(String address, String[] matcher){
+        int index = 0;
         for(int i = 0; i < matcher.length; i++){
-            int index = address.indexOf(matcher[i]);
-            if(index >= 0)
-                count ++;
+            int max = address.indexOf(matcher[i]);
+            if(max > index)
+                index = max;
         }
-        return count;
+        return index;
     }
 }
